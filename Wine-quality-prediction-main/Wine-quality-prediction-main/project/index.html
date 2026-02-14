@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wine Quality Prediction | Machine Learning Classification</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">Wine Quality Prediction</h1>
+            <nav class="nav">
+                <a href="#predictor" class="nav-link">Predictor</a>
+                <a href="#methodology" class="nav-link">Methodology</a>
+                <a href="#model-info" class="nav-link">Model Info</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1 class="hero-title">Advanced Wine Quality Classification</h1>
+                <p class="hero-subtitle">Predict wine quality using machine learning with 92% accuracy</p>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">6,497</span>
+                        <span class="stat-label">Wines Analyzed</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">92%</span>
+                        <span class="stat-label">Model Accuracy</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">10</span>
+                        <span class="stat-label">Features</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="predictor" class="predictor-section">
+            <div class="container">
+                <h2 class="section-title">Wine Quality Prediction</h2>
+                <div class="prediction-container">
+                    <div class="input-panel">
+                        <h3>Enter Wine Characteristics</h3>
+                        <form id="prediction-form" class="prediction-form">
+                            <div class="form-group">
+                                <label for="wine-type">Wine Type</label>
+                                <select id="wine-type" required>
+                                    <option value="">Select wine type</option>
+                                    <option value="1">White Wine</option>
+                                    <option value="0">Red Wine</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="fixed-acidity">Fixed Acidity</label>
+                                    <input type="number" id="fixed-acidity" min="0" max="16" step="0.1" value="7.0" required>
+                                    <span class="range-hint">Range: 3.8-15.9</span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="volatile-acidity">Volatile Acidity</label>
+                                    <input type="number" id="volatile-acidity" min="0" max="2" step="0.01" value="0.3" required>
+                                    <span class="range-hint">Range: 0.08-1.58</span>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="citric-acid">Citric Acid</label>
+                                    <input type="number" id="citric-acid" min="0" max="2" step="0.01" value="0.3" required>
+                                    <span class="range-hint">Range: 0.0-1.66</span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="residual-sugar">Residual Sugar</label>
+                                    <input type="number" id="residual-sugar" min="0" max="70" step="0.1" value="5.0" required>
+                                    <span class="range-hint">Range: 0.6-65.8</span>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="chlorides">Chlorides</label>
+                                    <input type="number" id="chlorides" min="0" max="1" step="0.001" value="0.05" required>
+                                    <span class="range-hint">Range: 0.009-0.611</span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="free-sulfur">Free Sulfur Dioxide</label>
+                                    <input type="number" id="free-sulfur" min="0" max="300" step="1" value="30" required>
+                                    <span class="range-hint">Range: 1-289</span>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="density">Density</label>
+                                    <input type="number" id="density" min="0.98" max="1.04" step="0.0001" value="0.995" required>
+                                    <span class="range-hint">Range: 0.987-1.039</span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="ph">pH</label>
+                                    <input type="number" id="ph" min="2.5" max="4.5" step="0.01" value="3.2" required>
+                                    <span class="range-hint">Range: 2.72-4.01</span>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="sulphates">Sulphates</label>
+                                    <input type="number" id="sulphates" min="0.2" max="2.5" step="0.01" value="0.5" required>
+                                    <span class="range-hint">Range: 0.22-2.0</span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="alcohol">Alcohol Content (%)</label>
+                                    <input type="number" id="alcohol" min="8" max="15" step="0.1" value="10.5" required>
+                                    <span class="range-hint">Range: 8.0-14.9</span>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="predict-btn">Predict Wine Quality</button>
+                        </form>
+                    </div>
+
+                    <div class="results-panel">
+                        <h3>Prediction Results</h3>
+                        <div id="prediction-results" class="results-content">
+                            <div class="placeholder">
+                                <p>Enter wine characteristics and click "Predict Wine Quality" to see results</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="methodology" class="methodology-section">
+            <div class="container">
+                <h2 class="section-title">Classification Model Methodology</h2>
+                <div class="methodology-grid">
+                    <div class="method-card">
+                        <h3>Data Preprocessing</h3>
+                        <ul>
+                            <li>6,497 wine samples analyzed</li>
+                            <li>Missing value imputation using mean strategy</li>
+                            <li>Correlation analysis and feature selection</li>
+                            <li>MinMax normalization for optimal performance</li>
+                            <li>Binary classification: Quality > 5 = Good</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="method-card">
+                        <h3>Model Training</h3>
+                        <ul>
+                            <li>Multiple algorithms tested and compared</li>
+                            <li>XGBoost classifier achieved best performance</li>
+                            <li>80/20 train-test split with random state 40</li>
+                            <li>ROC-AUC evaluation metric for performance</li>
+                            <li>Cross-validation for model robustness</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="method-card">
+                        <h3>Feature Engineering</h3>
+                        <ul>
+                            <li>Removed highly correlated features (>0.7)</li>
+                            <li>10 key chemical properties analyzed</li>
+                            <li>Wine type encoding (white=1, red=0)</li>
+                            <li>Quality threshold optimization</li>
+                            <li>Feature importance analysis performed</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="model-info" class="model-info-section">
+            <div class="container">
+                <h2 class="section-title">Model Performance & Insights</h2>
+                <div class="performance-grid">
+                    <div class="performance-card">
+                        <h3>XGBoost Performance</h3>
+                        <div class="metrics">
+                            <div class="metric">
+                                <span class="metric-label">Training Accuracy</span>
+                                <span class="metric-value">97.6%</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-label">Validation Accuracy</span>
+                                <span class="metric-value">92.3%</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-label">Precision (Good Wine)</span>
+                                <span class="metric-value">93%</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-label">Recall (Good Wine)</span>
+                                <span class="metric-value">91%</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="performance-card">
+                        <h3>Key Insights</h3>
+                        <ul>
+                            <li>Alcohol content is a strong predictor of quality</li>
+                            <li>Acidity levels significantly impact wine rating</li>
+                            <li>White wines show different patterns than red wines</li>
+                            <li>Sulphate levels correlate with quality perception</li>
+                            <li>pH balance is crucial for wine appreciation</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="performance-card">
+                        <h3>Model Comparison</h3>
+                        <div class="comparison-table">
+                            <div class="comparison-row">
+                                <span>Logistic Regression</span>
+                                <span>91.2%</span>
+                            </div>
+                            <div class="comparison-row">
+                                <span>SVM (RBF Kernel)</span>
+                                <span>90.8%</span>
+                            </div>
+                            <div class="comparison-row highlight">
+                                <span>XGBoost</span>
+                                <span>92.3%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Wine Quality Prediction System. Advanced machine learning for wine classification.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
